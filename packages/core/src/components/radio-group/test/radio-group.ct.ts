@@ -95,9 +95,12 @@ test('emit group changed change', async ({ mount, page }) => {
   const onValueChange = radioGroupElement.evaluate<string>(
     (el) =>
       new Promise((resolve) => {
-        el.addEventListener('valueChange', (event: CustomEvent) => {
-          resolve(event.detail);
-        });
+        el.addEventListener(
+          'valueChange',
+          (event: CustomEvent /* STRICT -> not assignable */) => {
+            resolve(event.detail);
+          }
+        );
       })
   );
 

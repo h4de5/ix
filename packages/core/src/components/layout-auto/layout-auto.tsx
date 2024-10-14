@@ -103,21 +103,23 @@ export class LayoutForm implements IxComponent {
     });
 
     let column = 0;
-    Array.from(this.hostElement.children).forEach((child: HTMLElement) => {
-      let colspan = this.parseNumber(child.getAttribute('data-colspan'));
-      colspan = Math.min(colspan, layoutColumns);
-      const childRatio = colspan / layoutColumns;
+    Array.from(this.hostElement.children).forEach(
+      (child: HTMLElement /* STRICT -> not assignable */) => {
+        let colspan = this.parseNumber(child.getAttribute('data-colspan'));
+        colspan = Math.min(colspan, layoutColumns);
+        const childRatio = colspan / layoutColumns;
 
-      child.style.width = `calc(${childRatio * 99.9}% - ${
-        1 - childRatio
-      } * ${columnSpacing})`;
+        child.style.width = `calc(${childRatio * 99.9}% - ${
+          1 - childRatio
+        } * ${columnSpacing})`;
 
-      if (column + colspan > layoutColumns) {
-        column = 0;
+        if (column + colspan > layoutColumns) {
+          column = 0;
+        }
+
+        column = (column + colspan) % layoutColumns;
       }
-
-      column = (column + colspan) % layoutColumns;
-    });
+    );
   }
 
   render() {

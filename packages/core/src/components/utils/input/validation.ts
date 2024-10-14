@@ -130,7 +130,12 @@ export function HookValidationLifecycle(options?: {
             // patternMismatch used for `ix-date-input`
             .filter((key) => ['patternMismatch'].includes(key))
             .forEach((key) => {
-              host.classList.toggle(`ix-invalid--${key}`, validityState[key]);
+              host.classList.toggle(
+                `ix-invalid--${key}`,
+                validityState[
+                  key
+                ] /* STRICT -> string can't be used to index ValidityState */
+              );
             });
         }
       };

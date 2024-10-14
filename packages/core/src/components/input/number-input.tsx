@@ -169,7 +169,7 @@ export class NumberInput implements IxInputFieldComponent<number> {
 
   @HookValidationLifecycle()
   updateClassMappings(result: ValidationResults) {
-    mapValidationResult(this, result);
+    mapValidationResult(this /* STRICT -> not assignable */, result);
   }
 
   componentWillLoad() {
@@ -257,7 +257,7 @@ export class NumberInput implements IxInputFieldComponent<number> {
           isValid={this.isValid}
           isInfo={this.isInfo}
           isWarning={this.isWarning}
-          controlRef={this.inputRef}
+          controlRef={this.inputRef /* STRICT */}
         >
           <div
             class={{
@@ -282,12 +282,19 @@ export class NumberInput implements IxInputFieldComponent<number> {
               value={this.value}
               placeholder={this.placeholder}
               inputRef={this.inputRef}
-              onKeyPress={(event) => checkAllowedKeys(this, event)}
+              onKeyPress={(event) =>
+                checkAllowedKeys(this /* STRICT -> not assignable*/, event)
+              }
               valueChange={(value) => this.valueChange.emit(Number(value))}
               updateFormInternalValue={(value) =>
                 this.updateFormInternalValue(Number(value))
               }
-              onBlur={() => onInputBlur(this, this.inputRef.current)}
+              onBlur={() =>
+                onInputBlur(
+                  this /* STRICT -> not assignable */,
+                  this.inputRef.current
+                )
+              }
             ></InputElement>
             <SlotEnd
               slotEndRef={this.slotEndRef}
@@ -302,7 +309,10 @@ export class NumberInput implements IxInputFieldComponent<number> {
                     class="number-stepper-button step-minus"
                     onClick={() => {
                       this.inputRef.current.stepDown();
-                      checkInternalValidity(this, this.inputRef.current);
+                      checkInternalValidity(
+                        this /* STRICT -> not assignable */,
+                        this.inputRef.current
+                      );
                       this.updateFormInternalValue(
                         Number(this.inputRef.current.value)
                       );
@@ -316,7 +326,10 @@ export class NumberInput implements IxInputFieldComponent<number> {
                     class="number-stepper-button step-plus"
                     onClick={() => {
                       this.inputRef.current.stepUp();
-                      checkInternalValidity(this, this.inputRef.current);
+                      checkInternalValidity(
+                        this /* STRICT -> not assignable */,
+                        this.inputRef.current
+                      );
                       this.updateFormInternalValue(
                         Number(this.inputRef.current.value)
                       );

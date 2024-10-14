@@ -189,7 +189,7 @@ export class Checkbox implements IxFormComponent<string> {
             aria-checked={`${this.checked}`}
             disabled={this.disabled}
             checked={this.checked}
-            ref={this.inputRef}
+            ref={this.inputRef /* STRICT */}
             type="checkbox"
             onChange={() => this.setCheckedState(!this.checked)}
           />

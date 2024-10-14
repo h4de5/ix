@@ -45,7 +45,7 @@ export class FormFieldLabel implements IxComponent {
   private readonly htmlForObserver = new MutationObserver(() =>
     this.checkForInternalState()
   );
-  private htmlForClassObserver: ClassMutationObserver;
+  private htmlForClassObserver: ClassMutationObserver; /* STRICT -> not assigned in constructor */
   private controlRefClassObserver?: ClassMutationObserver;
   private a11yAttributes: A11yAttributes = {};
   private readonly labelRef = makeRef<HTMLLabelElement>();
@@ -180,7 +180,7 @@ export class FormFieldLabel implements IxComponent {
         <label
           htmlFor={this.htmlFor}
           {...this.a11yAttributes}
-          ref={this.labelRef}
+          ref={this.labelRef /* STRICT */}
         >
           <ix-typography
             color={this.isInvalid ? 'alarm' : 'soft'}

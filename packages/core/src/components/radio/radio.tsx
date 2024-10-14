@@ -145,7 +145,7 @@ export class Radio implements IxFormComponent<string> {
             aria-checked={`${this.checked}`}
             disabled={this.disabled}
             checked={this.checked}
-            ref={this.inputRef}
+            ref={this.inputRef /* STRICT */}
             type="radio"
             onChange={() => {
               const ref = this.inputRef.current;

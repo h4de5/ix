@@ -299,7 +299,7 @@ export class DateInput implements IxInputFieldComponent<string> {
           readOnly={this.readonly}
           readonly={this.readonly}
           required={this.required}
-          ref={this.inputElementRef}
+          ref={this.inputElementRef /* STRICT */}
           type="text"
           value={this.value}
           onInput={(event) => {
@@ -424,14 +424,14 @@ export class DateInput implements IxInputFieldComponent<string> {
           validText={this.validText}
           showTextAsTooltip={this.showTextAsTooltip}
           required={this.required}
-          controlRef={this.inputElementRef}
+          controlRef={this.inputElementRef /* STRICT */}
         >
           {this.renderInput()}
         </ix-field-wrapper>
         <ix-dropdown
           data-testid="date-dropdown"
           trigger={this.inputElementRef.waitForCurrent()}
-          ref={this.dropdownElementRef}
+          ref={this.dropdownElementRef /* STRICT */}
           closeBehavior="outside"
           suppressOverflowBehavior={true}
           show={this.show}
@@ -440,7 +440,7 @@ export class DateInput implements IxInputFieldComponent<string> {
           }}
         >
           <ix-date-picker
-            ref={this.datepickerRef}
+            ref={this.datepickerRef /* STRICT */}
             format={this.format}
             range={false}
             from={this.from ?? ''}

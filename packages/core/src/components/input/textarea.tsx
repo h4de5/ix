@@ -179,7 +179,7 @@ export class Textarea implements IxInputFieldComponent<string> {
 
   @HookValidationLifecycle()
   updateClassMappings(result: ValidationResults) {
-    mapValidationResult(this, result);
+    mapValidationResult(this /* STRICT -> not assignable */, result);
   }
 
   componentWillLoad() {
@@ -240,10 +240,14 @@ export class Textarea implements IxInputFieldComponent<string> {
           isValid={this.isValid}
           isInfo={this.isInfo}
           isWarning={this.isWarning}
-          controlRef={this.textAreaRef}
+          controlRef={this.textAreaRef /* STRICT */}
         >
           {this.maxLength > 0 && (
-            <ix-typography class="bottom-text" slot="bottom-right" color="soft">
+            /* STRICT -> object possibly undefined */ <ix-typography
+              class="bottom-text"
+              slot="bottom-right"
+              color="soft"
+            >
               {this.value.length}/{this.maxLength}
             </ix-typography>
           )}
@@ -267,7 +271,12 @@ export class Textarea implements IxInputFieldComponent<string> {
               updateFormInternalValue={(value) =>
                 this.updateFormInternalValue(value)
               }
-              onBlur={() => onInputBlur(this, this.textAreaRef.current)}
+              onBlur={() =>
+                onInputBlur(
+                  this /* STRICT -> not assignable */,
+                  this.textAreaRef.current
+                )
+              }
             ></TextareaElement>
           </div>
         </ix-field-wrapper>

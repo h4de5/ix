@@ -38,7 +38,7 @@ export function TextareaElement(props: {
       minLength={props.minLength}
       cols={props.textareaCols}
       rows={props.textareaRows}
-      ref={props.textAreaRef}
+      ref={props.textAreaRef /* STRICT */}
       class={{
         'is-invalid': props.isInvalid,
       }}
@@ -95,7 +95,7 @@ export function InputElement(props: {
       max={props.max}
       maxLength={props.maxLength ? Number(props.maxLength) : undefined}
       minLength={props.maxLength ? Number(props.minLength) : undefined}
-      ref={props.inputRef}
+      ref={props.inputRef /* STRICT */}
       pattern={props.pattern}
       type={props.type}
       class={{
@@ -124,10 +124,10 @@ export function SlotEnd(
     slotEndRef: MakeRef<HTMLDivElement>;
     onSlotChange?: (e: Event) => void;
   },
-  children
+  children /* STRICT -> any type */
 ) {
   return (
-    <div class="end-container" ref={props.slotEndRef}>
+    <div class="end-container" ref={props.slotEndRef /* STRICT */}>
       <slot name="end" onSlotchange={props.onSlotChange}></slot>
       {children}
     </div>
@@ -139,7 +139,7 @@ export function SlotStart(props: {
   onSlotChange?: (e: Event) => void;
 }) {
   return (
-    <div class="start-container" ref={props.slotStartRef}>
+    <div class="start-container" ref={props.slotStartRef /* STRICT */}>
       <slot name="start" onSlotchange={props.onSlotChange}></slot>
     </div>
   );

@@ -174,7 +174,7 @@ export class Input implements IxInputFieldComponent<string> {
 
   @HookValidationLifecycle()
   updateClassMappings(result: ValidationResults) {
-    mapValidationResult(this, result);
+    mapValidationResult(this /* STRICT -> not assignable */, result);
   }
 
   @Watch('type')
@@ -266,7 +266,7 @@ export class Input implements IxInputFieldComponent<string> {
           isValid={this.isValid}
           isInfo={this.isInfo}
           isWarning={this.isWarning}
-          controlRef={this.inputRef}
+          controlRef={this.inputRef /* STRICT */}
         >
           <div class="input-wrapper">
             <SlotStart
@@ -286,12 +286,19 @@ export class Input implements IxInputFieldComponent<string> {
               value={this.value}
               placeholder={this.placeholder}
               inputRef={this.inputRef}
-              onKeyPress={(event) => checkAllowedKeys(this, event)}
+              onKeyPress={(event) =>
+                checkAllowedKeys(this /* STRICT -> not assignable */, event)
+              }
               valueChange={(value) => this.valueChange.emit(value)}
               updateFormInternalValue={(value) =>
                 this.updateFormInternalValue(value)
               }
-              onBlur={() => onInputBlur(this, this.inputRef.current)}
+              onBlur={() =>
+                onInputBlur(
+                  this /* STRICT -> not assignable */,
+                  this.inputRef.current
+                )
+              }
               ariaAttributes={inputAria}
             ></InputElement>
             <SlotEnd
@@ -319,7 +326,11 @@ export class Input implements IxInputFieldComponent<string> {
             </SlotEnd>
           </div>
           {this.maxLength > 0 && (
-            <ix-typography class="bottom-text" slot="bottom-right" color="soft">
+            /* STRICT -> object possibly undefined */ <ix-typography
+              class="bottom-text"
+              slot="bottom-right"
+              color="soft"
+            >
               {this.value?.length}/{this.maxLength}
             </ix-typography>
           )}

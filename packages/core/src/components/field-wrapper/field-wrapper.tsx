@@ -114,7 +114,7 @@ export class FieldWrapper implements FieldWrapperInterface {
           class={{
             'slot-wrapper': true,
           }}
-          ref={this.slotRef}
+          ref={this.slotRef /* STRICT */}
         >
           <slot></slot>
         </div>

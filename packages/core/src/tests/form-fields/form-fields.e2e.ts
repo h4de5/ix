@@ -37,10 +37,12 @@ async function changeToReadonly(page: Page) {
     const elements = document.querySelectorAll(
       '[data-field], ix-radio, ix-checkbox'
     );
-    Array.from(elements).forEach((element: HTMLInputElement) => {
-      element.readOnly = true;
-      element.setAttribute('readonly', '');
-    });
+    Array.from(elements).forEach(
+      (element: HTMLInputElement /* STRICT -> not assignable */) => {
+        element.readOnly = true;
+        element.setAttribute('readonly', '');
+      }
+    );
   });
 }
 
@@ -49,9 +51,11 @@ async function changeToDisabled(page: Page) {
     const elements = document.querySelectorAll(
       '[data-field], ix-radio, ix-checkbox'
     );
-    Array.from(elements).forEach((element: HTMLInputElement) => {
-      element.disabled = true;
-    });
+    Array.from(elements).forEach(
+      (element: HTMLInputElement /* STRICT -> not assignable */) => {
+        element.disabled = true;
+      }
+    );
   });
 }
 
